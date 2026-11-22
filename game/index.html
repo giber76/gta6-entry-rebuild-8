@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solara Bay — an open-world crime game</title>
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; background: #0a1420; font-family: 'Segoe UI', system-ui, sans-serif; }
+  #app, #app canvas { position: fixed; inset: 0; display: block; }
+  #hud { display: none; position: fixed; inset: 0; pointer-events: none; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.7); }
+  #topbar { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; justify-content: space-between; align-items: flex-start; }
+  #cash { font-size: 30px; font-weight: 800; letter-spacing: .5px; }
+  #wanted { font-size: 24px; letter-spacing: 4px; margin-top: 2px; }
+  #health { width: 180px; height: 10px; background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.5); border-radius: 5px; margin-top: 8px; overflow: hidden; }
+  #health-fill { height: 100%; width: 100%; background: #4ad88a; }
+  #rightbox { text-align: right; }
+  #radio { font-size: 16px; font-weight: 700; }
+  #speed { font-size: 26px; font-weight: 800; margin-top: 2px; }
+  #mission { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-size: 17px; font-weight: 700; background: rgba(0,0,0,.55); padding: 8px 18px; border-radius: 20px; white-space: nowrap; }
+  #toast { position: absolute; bottom: 66px; left: 50%; transform: translateX(-50%); font-size: 19px; font-weight: 800; color: #ffd020; opacity: 0; transition: opacity .4s; white-space: nowrap; }
+  #minimap { position: absolute; left: 14px; bottom: 14px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+  #screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(160deg, rgba(8,30,60,.82), rgba(120,50,10,.55)); color: #fff; text-align: center; z-index: 10; }
+  #screen-title { font-size: 72px; font-weight: 900; letter-spacing: 6px; margin: 0; text-shadow: 0 4px 24px rgba(0,0,0,.6); }
+  #screen-sub { font-size: 20px; margin: 10px 0 28px; opacity: .92; }
+  #screen button { pointer-events: auto; font-size: 20px; font-weight: 800; padding: 14px 34px; margin: 6px; border: none; border-radius: 30px; cursor: pointer; background: #ffb020; color: #201404; box-shadow: 0 4px 16px rgba(0,0,0,.4); }
+  #screen button:hover { background: #ffc840; }
+  #controls { margin-top: 26px; font-size: 14px; opacity: .85; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="hud">
+  <div id="topbar">
+    <div>
+      <div id="cash">$0</div>
+      <div id="wanted">☆☆☆</div>
+      <div id="health"><div id="health-fill"></div></div>
+    </div>
+    <div id="rightbox">
+      <div id="radio">♪ VICE 101</div>
+      <div id="speed"></div>
+    </div>
+  </div>
+  <canvas id="minimap" width="180" height="180"></canvas>
+  <div id="toast"></div>
+  <div id="mission">M1 — The First Coupe ($500)</div>
+</div>
+<div id="screen">
+  <h1 id="screen-title">SOLARA BAY</h1>
+  <p id="screen-sub">Six jobs. One city. $12,000 on the line.</p>
+  <button id="btn-new">▶ &nbsp;New Game</button>
+  <button id="btn-freeroam" style="display:none">Free Roam</button>
+  <button id="btn-retry" style="display:none">↻ &nbsp;Try Again</button>
+  <div id="controls">
+    W drive / walk &nbsp;·&nbsp; A/D steer &nbsp;·&nbsp; E enter car / hold at the vault<br>
+    Mouse click shoot &nbsp;·&nbsp; R radio &nbsp;·&nbsp; Z/X minimap zoom &nbsp;·&nbsp; Esc pause
+  </div>
+</div>
+<script src="vendor/three.min.js"></script>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
